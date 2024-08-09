@@ -2,8 +2,10 @@ package iasi.CP2.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import iasi.CP2.model.Brinquedo;
 import iasi.CP2.repository.BrinquedoRepositorio;
 
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
@@ -28,7 +34,7 @@ public class BrinquedoController {
     BrinquedoRepositorio brinquedoRepositorio;
 
     @GetMapping("/brinquedos")
-    public ResponseEntity<List<Brinquedo>> getAllBrinquedos(@RequestParam(required = false) String nome) {
+    public ResponseEntity<List<EntityModel<Brinquedo>>> getAllBrinquedos(@RequestParam(required = false) String nome) {
         try {
             List<Brinquedo> brinquedos = new ArrayList<Brinquedo>();
 
@@ -41,18 +47,25 @@ public class BrinquedoController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(brinquedos, HttpStatus.OK);
+            List<EntityModel<Brinquedo>> brinquedosModel = brinquedos.stream()
+                    .map(brinquedo -> EntityModel.of(brinquedo,
+                            linkTo(methodOn(BrinquedoController.class).getBrinquedoById(brinquedo.getId())).withSelfRel()))
+                    .collect(Collectors.toList());
+
+            return new ResponseEntity<>(brinquedosModel, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/brinquedos/{id}")
-    public ResponseEntity<Brinquedo> getBrinquedoById(@PathVariable("id") long id) {
+    public ResponseEntity<EntityModel<Brinquedo>> getBrinquedoById(@PathVariable("id") long id) {
         Brinquedo brinquedo = brinquedoRepositorio.findById(id);
 
         if (brinquedo != null) {
-            return new ResponseEntity<>(brinquedo, HttpStatus.OK);
+            EntityModel<Brinquedo> brinquedoModel = EntityModel.of(brinquedo,
+                    linkTo(methodOn(BrinquedoController.class).getAllBrinquedos(null)).withRel("brinquedos"));
+            return new ResponseEntity<>(brinquedoModel, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
