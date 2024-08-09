@@ -63,8 +63,7 @@ public class BrinquedoController {
         Brinquedo brinquedo = brinquedoRepositorio.findById(id);
 
         if (brinquedo != null) {
-            EntityModel<Brinquedo> brinquedoModel = EntityModel.of(brinquedo,
-                    linkTo(methodOn(BrinquedoController.class).getAllBrinquedos(null)).withRel("brinquedos"));
+            EntityModel<Brinquedo> brinquedoModel = EntityModel.of(brinquedo);
             return new ResponseEntity<>(brinquedoModel, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
