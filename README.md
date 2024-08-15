@@ -18,4 +18,5 @@ na tabela TDS_TB_Brinquedos no banco de dados Oracle_FIAP utilizando o SQL Devel
 Adicionamos também as bibliotecas Lombok, para simplificar a criação de código, e HATEOAS, para facilitar a implementação de links de navegação entre os recursos na API.</p>
 
 <h2>Listagem de todos os endpoints</h2>
-![imagemendpoints](https://github.com/user-attachments/assets/86146e60-0021-45b7-b787-eaccfbd54d25)
+![image](https://github.com/user-attachments/assets/5bf85c9e-1604-4551-93eb-9b74358b4752)
+
