@@ -1,17 +1,22 @@
 FROM ubuntu:latest AS build
 
 RUN apt-get update
-RUN apt-get install wget -y
+RUN apt-get install -y openjdk-20-jdk maven
 
-RUN wget https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.deb
-RUN dpkg -i jdk-20_linux-x64_bin.deb
+ENV JAVA_HOME=/usr/lib/jvm/java-20-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
 
 COPY . .
 
-RUN apt-get install maven -y
 RUN mvn clean install
 
-FROM oraclelinux:8-slim
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install -y openjdk-20-jdk
+
+ENV JAVA_HOME=/usr/lib/jvm/java-20-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
 
 EXPOSE 8080
 
