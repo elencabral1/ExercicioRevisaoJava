@@ -17,6 +17,24 @@ HTTP, que foram testados posteriormente utilizando o software Insomnia, e realiz
 na tabela TDS_TB_Brinquedos no banco de dados Oracle_FIAP utilizando o SQL Developer. 
 Adicionamos também as bibliotecas Lombok, para simplificar a criação de código, e HATEOAS, para facilitar a implementação de links de navegação entre os recursos na API.</p>
 
-<h2>Listagem de todos os endpoints</h2>
-<img align="center" alt="endpoints" scr="https://github.com/user-attachments/assets/bf965c27-2160-4a7a-b6eb-289e42c8e112" />
+<h2>Link do versionamento</h2>
+https://exerciciorevisaojava.onrender.com
 
+<h2>Funcionalidades</h2>
+<p>Criar: Adicionar novos brinquedos ao sistema.</p>
+<p>Ler: Recuperar informações sobre brinquedos, incluindo detalhes como nome, tipo, classificação, tamanho e preço.</p>
+<p>Atualizar: Modificar informações de brinquedos existentes.</p>
+<p>Deletar: Remover brinquedos do sistema.</p>
+
+<h2>Configuração do Spring Initializer e dependências</h2>
+<img alt="spring initializer" scr="images/springInitializer.png" />
+<img alt="dependencias" scr="images/dependencies.png" />
+
+<h2>Listagem de todos os endpoints</h2>
+<img alt="endpoints" scr="images/endpoints.png" />
+
+<img alt="getAll" scr="images/getAll.png" />
+<img alt="getId" scr="images/getId.png" />
+<img alt="create" scr="images/create.png" />
+<img alt="update" scr="images/update.png" />
+<img alt="delete" scr="images/delete.png" />
