@@ -26,7 +26,7 @@ import iasi.CP2.repository.BrinquedoRepositorio;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "https://exerciciorevisaojava.onrender.com")
 @RestController
 @RequestMapping("/api")
 public class BrinquedoController {
